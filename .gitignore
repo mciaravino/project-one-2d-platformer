@@ -1,3 +1,29 @@
-# Godot 4+ specific ignores
+# --- Godot ---
 .godot/
-/android/
+.import/
+.export/
+.export_presets.cfg
+*.translation
+
+# --- Mono / C# (ignore if not using C#) ---
+.mono/
+.vscode/
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs / temp ---
+*.log
+*.tmp
+
+# --- Build / export output ---
+build/
+bin/
+dist/
+
+# --- Backup files ---
+*~
+*.bak
+*.old
