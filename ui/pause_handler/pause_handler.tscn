@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdpw5v5gdu6ko"]
+
+[ext_resource type="Script" uid="uid://roe3nis473w2" path="res://ui/pause_handler/pause_handler.gd" id="1_3rw88"]
+
+[node name="PauseHandler" type="Node"]
+script = ExtResource("1_3rw88")
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 100

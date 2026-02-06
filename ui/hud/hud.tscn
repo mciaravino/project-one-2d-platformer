@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://tfx45ar6w5xg"]
+
+[ext_resource type="Script" uid="uid://w0x2pyvh2hwn" path="res://ui/hud/hud_control.gd" id="1_xmswo"]
+
+[node name="Hud" type="CanvasLayer"]
+layer = 50
+
+[node name="HudControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xmswo")
+
+[node name="Health" type="Label" parent="HudControl"]
+layout_mode = 0
+offset_right = 81.0
+offset_bottom = 23.0
+text = "Health: Inf"
