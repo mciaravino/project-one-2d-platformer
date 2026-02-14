@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkj7mbqg06gaf"]
+[gd_scene load_steps=13 format=3 uid="uid://dkj7mbqg06gaf"]
 
 [ext_resource type="Script" uid="uid://b7qnfumevl21k" path="res://actors/player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://b3pkg476kyrk6" path="res://art/player1/player_strip.png" id="2_ilk7j"]
+[ext_resource type="AudioStream" uid="uid://mile775xiehk" path="res://audio/sfx/player_attack.wav" id="3_ax26v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vn7o3"]
 height = 40.0
@@ -66,7 +67,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ilk7j"]
+radius = 2.79361
+height = 14.4105
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 66
+collision_mask = 21
 script = ExtResource("1_oul6g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -81,3 +88,16 @@ position = Vector2(4, 2)
 sprite_frames = SubResource("SpriteFrames_388e2")
 animation = &"attack"
 flip_h = true
+
+[node name="AttackHitBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitBox"]
+position = Vector2(16, 2)
+rotation = -2.51327
+shape = SubResource("CapsuleShape2D_ilk7j")
+
+[node name="SfxAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ax26v")
+bus = &"SFX"

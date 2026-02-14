@@ -59,6 +59,23 @@ attack={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="World"
+2d_render/layer_2="Player"
+2d_render/layer_3="Enemy"
+2d_render/layer_4="PlayerAttack"
+2d_render/layer_5="EnemyAttack"
+2d_render/layer_6="Pickups"
+2d_render/layer_7="Triggers"
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="PlayerAttack"
+2d_physics/layer_5="EnemyAttack"
+2d_physics/layer_6="Pickups"
+2d_physics/layer_7="Triggers"
+
 [physics]
 
 2d/default_gravity=3600.0

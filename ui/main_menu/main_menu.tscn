@@ -38,7 +38,7 @@ size_flags_vertical = 3
 
 [node name="GameTitle" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Twin Shooter"
+text = "Project One"
 horizontal_alignment = 1
 
 [node name="SpacerLower" type="Control" parent="PanelContainer/VBoxContainer"]
