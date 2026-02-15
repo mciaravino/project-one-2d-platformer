@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bpmnxaache1qk"]
+[gd_scene load_steps=10 format=4 uid="uid://bpmnxaache1qk"]
 
 [ext_resource type="Script" uid="uid://c7ebxvb2q2r1o" path="res://levels/level_02/level_02.gd" id="1_8yqd8"]
 [ext_resource type="TileSet" uid="uid://c7ub32xs5fola" path="res://tilesets/field_tiles_32.tres" id="2_h518d"]
@@ -8,13 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://tfx45ar6w5xg" path="res://ui/hud/hud.tscn" id="6_eh07g"]
 [ext_resource type="Texture2D" uid="uid://cpw06xddqyem6" path="res://art/backgrounds/farBackground_field.png" id="7_u2w5y"]
 [ext_resource type="Texture2D" uid="uid://cak3qdf6kybpp" path="res://art/backgrounds/nearBackground_field.png" id="8_ufdke"]
+[ext_resource type="PackedScene" uid="uid://obhp01klbayh" path="res://actors/kill_zone/kill_zone.tscn" id="9_ufdke"]
 
 [node name="Level02" type="Node2D"]
 position = Vector2(96, 160)
 script = ExtResource("1_8yqd8")
-
-[node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(-54, -37)
 
 [node name="UnlockedDoor" parent="." instance=ExtResource("3_didps")]
 position = Vector2(433, 192)
@@ -53,3 +51,20 @@ motion_mirroring = Vector2(640, 0)
 [node name="NearSprite" type="Sprite2D" parent="ParallaxBackground/Near"]
 texture = ExtResource("8_ufdke")
 centered = false
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-56, -48)
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+position = Vector2(40, -72)
+
+[node name="EnemySpawn_01" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(272, -48)
+
+[node name="EnemySpawn_02" type="Marker2D" parent="EnemySpawns"]
+top_level = true
+position = Vector2(640, 296)
+
+[node name="KillZone" parent="." instance=ExtResource("9_ufdke")]
+position = Vector2(48, 328)
+scale = Vector2(200, 1)

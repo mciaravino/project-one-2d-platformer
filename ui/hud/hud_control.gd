@@ -10,9 +10,9 @@ func bind_to_player(p: Node) -> void:
 	if p.has_signal("health_changed"):
 		p.health_changed.connect(_on_health_changed)
 
-	# initialize immediately
-	if "health" in p and "max_health" in p:
-		_on_health_changed(p.health, p.max_health)
+	# Initialize immediately using correct property names
+	if "hp" in p and "max_hp" in p:
+		_on_health_changed(p.hp, p.max_hp)
 
 func _on_health_changed(current: int, max_health: int) -> void:
 	label.text = "HP: %d / %d" % [current, max_health]

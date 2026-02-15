@@ -1,3 +1,4 @@
+# res://ui/pause_handler.gd (or wherever yours lives)
 extends Node
 
 @export var pause_menu_scene: PackedScene
@@ -21,6 +22,19 @@ func _unhandled_input(event: InputEvent) -> void:
 func _toggle_pause() -> void:
 	if pause_menu == null:
 		return
+
 	var tree := get_tree()
-	tree.paused = not tree.paused
-	pause_menu.visible = tree.paused
+	if tree.paused:
+		# Prefer the menu’s close method (unpauses + hides)
+		if pause_menu.has_method("close_menu"):
+			pause_menu.call("close_menu")
+		else:
+			tree.paused = false
+			pause_menu.visible = false
+	else:
+		# Prefer the menu’s open method (pauses + shows + focus)
+		if pause_menu.has_method("open_menu"):
+			pause_menu.call("open_menu")
+		else:
+			tree.paused = true
+			pause_menu.visible = true

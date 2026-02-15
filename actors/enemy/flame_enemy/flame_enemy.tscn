@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://btaetfkyd3nif"]
+
+[ext_resource type="Script" uid="uid://ds3u6dbca0oyg" path="res://actors/enemy/flame_enemy/flame_enemy.gd" id="1_jtvko"]
+[ext_resource type="PackedScene" uid="uid://bi0qqc1r8f0ac" path="res://actors/enemy/flame_enemy/flame_projectile/flame_projectile.tscn" id="2_42tu6"]
+[ext_resource type="Texture2D" uid="uid://cgfdeycw20x2o" path="res://actors/enemy/flame_enemy/flame_enemy.png" id="2_isx0s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42tu6"]
+radius = 16.0
+height = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c7dx"]
+atlas = ExtResource("2_isx0s")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e23kg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c7dx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="FlameEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_jtvko")
+projectile_scene = ExtResource("2_42tu6")
+shots_per_second = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_42tu6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e23kg")
+animation = &"idle"
+
+[node name="ShooterNode" type="Node2D" parent="."]
+
+[node name="MuzzleMarker" type="Marker2D" parent="ShooterNode"]
+position = Vector2(17, 4)
+
+[node name="ShootTimer" type="Timer" parent="."]

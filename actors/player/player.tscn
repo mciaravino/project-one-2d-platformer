@@ -72,8 +72,8 @@ radius = 2.79361
 height = 14.4105
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 66
-collision_mask = 21
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_oul6g")
 attack_sfx = ExtResource("2_ax26v")
 

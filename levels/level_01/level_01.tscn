@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://tfx45ar6w5xg" path="res://ui/hud/hud.tscn" id="3_gg43x"]
 [ext_resource type="PackedScene" uid="uid://cdpw5v5gdu6ko" path="res://ui/pause_handler/pause_handler.tscn" id="5_71kry"]
 [ext_resource type="PackedScene" uid="uid://cm3f1m1ejdfos" path="res://ui/pause_menu/pause_menu.tscn" id="6_aqob7"]
-[ext_resource type="PackedScene" uid="uid://btaetfkyd3nif" path="res://actors/enemy/flame_enemy/testEnemy.tscn" id="7_aqob7"]
 [ext_resource type="Texture2D" uid="uid://cpw06xddqyem6" path="res://art/backgrounds/farBackground_field.png" id="8_thp0t"]
 [ext_resource type="Texture2D" uid="uid://cak3qdf6kybpp" path="res://art/backgrounds/nearBackground_field.png" id="9_b3jm5"]
+[ext_resource type="PackedScene" uid="uid://obhp01klbayh" path="res://actors/kill_zone/kill_zone.tscn" id="9_upmp1"]
 
 [node name="Level01" type="Node2D"]
 script = ExtResource("1_81a5f")
@@ -29,9 +29,6 @@ pause_menu_scene = ExtResource("6_aqob7")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAALAAUAAAAAAAAAAAANAAUAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAYAAAAAAAAAAAAPAAYAAAAAAAAAAAAQAAYAAAAAAAAAAAARAAYAAAAAAAAAAAASAAYAAAAAAAAAAAATAAYAAAAAAAAAAAAUAAUAAAAAAAAAAAAUAAYAAAAAAAAAAAAVAAUAAAAAAAAAAAAWAAUAAAAAAAAAAAAXAAUAAAAAAAAAAAAYAAUAAAAAAAAAAAAZAAUAAAAAAAAAAAAaAAUAAAAAAAAAAAAbAAUAAAAAAAAAAAAcAAUAAAAAAAAAAAA=")
 tile_set = ExtResource("1_mckh2")
-
-[node name="TestEnemy" parent="." instance=ExtResource("7_aqob7")]
-position = Vector2(336, 80)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -57,3 +54,16 @@ motion_mirroring = Vector2(640, 0)
 [node name="NearSprite" type="Sprite2D" parent="ParallaxBackground/Near"]
 texture = ExtResource("9_b3jm5")
 centered = false
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+
+[node name="EnemySpawn_01" type="Marker2D" parent="EnemySpawns"]
+position = Vector2(248, 136)
+
+[node name="EnemySpawn_02" type="Marker2D" parent="EnemySpawns"]
+top_level = true
+position = Vector2(432, 136)
+
+[node name="KillZone" parent="." instance=ExtResource("9_upmp1")]
+position = Vector2(576, 352)
+scale = Vector2(200, 1)
