@@ -16,12 +16,15 @@ func _on_restart_level_pressed() -> void:
 	var tree := get_tree()
 	tree.paused = false
 	visible = false
+	Music.restart_music()          # <-- add
 	tree.reload_current_scene()
 
 func _on_return_to_main_pressed() -> void:
 	var tree := get_tree()
 	tree.paused = false
+	Music.stop_music()             # <-- add
 	tree.change_scene_to_file(main_menu_path)
 
 func _on_quit_button_pressed() -> void:
+	Music.stop_music()             # optional, but clean
 	get_tree().quit()

@@ -10,15 +10,16 @@ extends CharacterBody2D
 @export var attack_hit_start := 0.05
 @export var attack_hit_end := 0.20
 
+# Assign your sword/attack WAV here in the Player scene Inspector
+@export var attack_sfx: AudioStream
+@export var attack_sfx_frame := 0 # 0-based frame index for multi-frame attack anim
+
 var attack_time := 0.0
+var attack_sfx_played := false
 
 @onready var hitbox: Area2D = $AttackHitBox
 @onready var hitshape: CollisionShape2D = $AttackHitBox/CollisionShape2D
-@onready var sfx_attack: AudioStreamPlayer2D = $SfxAttack
-
-var attack_sfx_played := false
-@export var attack_sfx_frame := 0  # pick the frame index you want the whoosh on (0-based)
-
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 var gravity := 0.0
 var coyote_timer := 0.0
@@ -27,13 +28,10 @@ var jump_buffer_timer := 0.0
 var facing := 1 # 1 = right, -1 = left
 var attacking := false
 
-@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-
 
 func _ready() -> void:
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity") as float
 	hitbox.monitoring = true
-
 	hitshape.disabled = true
 
 	# Your art faces left by default, so "right" is flip_h = true.
@@ -41,13 +39,9 @@ func _ready() -> void:
 	anim.flip_h = true
 	anim.play("idle")
 
-	# End attack lock when the animation finishes.
 	anim.animation_finished.connect(_on_anim_finished)
-	# Script-based signal connect
 	hitbox.body_entered.connect(_on_attack_hitbox_body_entered)
-	print("Hitbox connected:", hitbox.body_entered.is_connected(_on_attack_hitbox_body_entered))
 	anim.frame_changed.connect(_on_anim_frame_changed)
-
 
 
 func _on_anim_finished() -> void:
@@ -62,16 +56,18 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not attacking:
 		attacking = true
 		attack_time = 0.0
-		attack_sfx_played = false   # <-- add this
+		attack_sfx_played = false
 		hitshape.disabled = true
 		anim.play("attack")
-		var fc := anim.sprite_frames.get_frame_count("attack")
+
+		# If attack animation is 1 frame (or missing), play immediately.
+		var fc := 0
+		if anim.sprite_frames != null and anim.sprite_frames.has_animation("attack"):
+			fc = anim.sprite_frames.get_frame_count("attack")
+
 		if fc <= 1:
 			attack_sfx_played = true
-			if sfx_attack.playing:
-				sfx_attack.stop()
-			sfx_attack.play()
-
+			Sfx.play_one_shot(attack_sfx)
 
 	# --- Timers ---
 	if is_on_floor():
@@ -97,10 +93,9 @@ func _physics_process(delta: float) -> void:
 		jump_buffer_timer = 0.0
 		coyote_timer = 0.0
 
-# --- Horizontal movement (allow during attack) ---
+	# --- Horizontal movement (allow during attack) ---
 	var dir := Input.get_axis("move_left", "move_right")
 	velocity.x = dir * speed
-
 
 	# --- Facing (only update when moving) ---
 	if dir != 0.0:
@@ -116,7 +111,6 @@ func _physics_process(delta: float) -> void:
 	# --- Animation state (don’t override attack while locked) ---
 	if not attacking:
 		if not is_on_floor():
-			# If you don't have "jump" / "fall" animations yet, keep idle.
 			if anim.animation != "idle":
 				anim.play("idle")
 		elif absf(velocity.x) > 1.0:
@@ -125,29 +119,26 @@ func _physics_process(delta: float) -> void:
 		else:
 			if anim.animation != "idle":
 				anim.play("idle")
-	
+
 	if attacking:
 		attack_time += delta
 		hitshape.disabled = not (
 			attack_time >= attack_hit_start and
 			attack_time <= attack_hit_end
 		)
-		
+
+
 func _on_attack_hitbox_body_entered(body: Node) -> void:
-	# Only register hits during the active frames
 	if not attacking:
 		return
 	if hitshape.disabled:
 		return
 
-	# Debug proof
 	print("HIT:", body.name)
 
-	# Damage hook (enemy implements this)
 	if body.has_method("take_damage"):
 		body.take_damage(1)
 
-	print("HIT:", body.name)
 
 func _on_anim_frame_changed() -> void:
 	if anim.animation != "attack":
@@ -156,6 +147,4 @@ func _on_anim_frame_changed() -> void:
 		return
 	if anim.frame >= attack_sfx_frame:
 		attack_sfx_played = true
-		if sfx_attack.playing:
-			sfx_attack.stop()
-		sfx_attack.play()
+		Sfx.play_one_shot(attack_sfx)

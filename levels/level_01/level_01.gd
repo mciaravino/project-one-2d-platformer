@@ -16,7 +16,7 @@ extends Node2D
 @export var fall_threshold: float =  25.0   # px/s (more positive = must be clearly falling)
 
 @onready var tile_layer: TileMapLayer = $TileMapLayer
-@onready var spawn_point: Marker2D = $SpawnPoint
+@onready var spawn_point: Marker2D = $PlayerSpawnPoint
 @onready var hud_control := $Hud/HudControl
 
 const CameraLimits = preload("res://shared_scripts/camera_settings.gd")
@@ -44,6 +44,12 @@ func _ready() -> void:
 		pad_left_tiles,
 		pad_right_tiles
 	)
+	var intro := preload("res://ui/background_music_player/background_wavs/field_wavs/field_intro.wav")
+	var loop := preload("res://ui/background_music_player/background_wavs/field_wavs/field_loop.wav")
+
+	Music.play_intro_and_loop(intro, loop)
+	
+	
 func _physics_process(delta: float) -> void:
 	if player == null or cam == null:
 		return

@@ -1,14 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://4glb6jeqrbkw"]
+[gd_scene load_steps=4 format=3 uid="uid://4glb6jeqrbkw"]
 
 [ext_resource type="Script" uid="uid://bmfo4uw4ixkjp" path="res://actors/doors/unlocked_door/unlocked_door.gd" id="1_30j0f"]
-
-[sub_resource type="Gradient" id="Gradient_30j0f"]
-offsets = PackedFloat32Array(0, 0.154185, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.933921, 0.933921, 0.933921, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x7156"]
-gradient = SubResource("Gradient_30j0f")
-width = 32
+[ext_resource type="Texture2D" uid="uid://cllywv5ko1tf4" path="res://actors/doors/unlocked_door/door.png" id="2_x7156"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7156"]
 size = Vector2(32, 64)
@@ -19,7 +12,7 @@ collision_mask = 2
 script = ExtResource("1_30j0f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_x7156")
+texture = ExtResource("2_x7156")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_x7156")

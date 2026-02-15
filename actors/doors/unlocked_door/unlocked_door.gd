@@ -3,6 +3,9 @@ extends Area2D
 @export var target_level: String
 @export var spawn_point_name: String = "SpawnPoint"
 
+# Assign your door sound here in the inspector (drag the .wav in)
+@export var door_sfx: AudioStream = preload("res://actors/doors/unlocked_door/unlocked_door.wav")
+
 var _player_inside: bool = false
 
 func _ready() -> void:
@@ -22,6 +25,7 @@ func _process(_delta: float) -> void:
 		return
 
 	if Input.is_action_just_pressed("interact"):
+		Sfx.play_one_shot(door_sfx)
 		_go_to_level()
 
 func _go_to_level() -> void:
@@ -29,5 +33,4 @@ func _go_to_level() -> void:
 		push_warning("UnlockedDoor has no target_level set.")
 		return
 
-	# Placeholder transition (clean, simple)
 	get_tree().change_scene_to_file(target_level)
