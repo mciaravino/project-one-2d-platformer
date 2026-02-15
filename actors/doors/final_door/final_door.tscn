@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqciupsovkvl4"]
+
+[ext_resource type="Script" uid="uid://cnpjnwacyj67h" path="res://actors/doors/final_door/final_door.gd" id="1_f0lcx"]
+[ext_resource type="Texture2D" uid="uid://bdide7h40r5r0" path="res://actors/doors/final_door/final_door.png" id="2_f0lcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7156"]
+size = Vector2(32, 64)
+
+[node name="FinalDoor" type="Area2D"]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_f0lcx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_f0lcx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x7156")

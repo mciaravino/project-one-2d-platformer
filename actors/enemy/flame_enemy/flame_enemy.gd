@@ -70,6 +70,7 @@ func take_damage(amount: int, channel: DamageChannel = DamageChannel.AUTO) -> vo
 		die()
 
 func die() -> void:
+	GameState.add_enemy_defeat(1)
 	queue_free()
 
 func _on_shoot_timer_timeout() -> void:

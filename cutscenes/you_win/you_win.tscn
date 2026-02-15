@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxr5jd0fecj8e"]
+
+[ext_resource type="Script" uid="uid://d0srxb8bnfycd" path="res://cutscenes/you_win/you_win.gd" id="1_hwdfv"]
+[ext_resource type="AudioStream" uid="uid://ia8nam8rg1i2" path="res://cutscenes/you_win/you_win.wav" id="2_0hqu0"]
+
+[node name="YouWin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hwdfv")
+win_sfx = ExtResource("2_0hqu0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "YOU WIN!"
+horizontal_alignment = 1
+
+[node name="Subtext" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press Interact to Return to Main Menu"

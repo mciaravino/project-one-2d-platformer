@@ -1,3 +1,4 @@
+# res://shared_scripts/level_base.gd  (or wherever your LevelBase lives)
 extends Node2D
 class_name LevelBase
 
@@ -74,20 +75,13 @@ func _spawn_player() -> void:
 	# Apply persistent HP to player
 	player.set_hp(GameState.hp)
 
-	# Capture (overwrite) the level-start HP snapshot for THIS load
+	# --- Capture (overwrite) the level-start snapshots for THIS load ---
+	# This ensures restart returns to the values at the moment this level was entered.
 	GameState.level_start_hp[self.scene_file_path] = GameState.hp
+	GameState.level_start_enemies[self.scene_file_path] = GameState.enemies_defeated
 
-		
 	cam = player.get_node("Camera2D") as Camera2D
 	cam.position = Vector2.ZERO
-	# --- Persistent HP across levels + per-level restart snapshot ---
-	GameState.ensure_initialized(player.max_hp)
-	GameState.set_max_hp(player.max_hp)
-
-	player.set_hp(GameState.hp)
-
-	# Capture "starting HP for this level" once (used for restarting this level)
-	GameState.capture_level_start(self)
 
 	# Optional: keep GameState.hp updated when player HP changes
 	if player.has_signal("health_changed"):
@@ -127,17 +121,18 @@ func _spawn_enemies() -> void:
 # Override in Level01/Level02 for music, cutscenes, etc.
 func _on_level_ready() -> void:
 	pass
-	
+
 func restart_level() -> void:
 	var tree := get_tree()
 	tree.paused = false
 
-	# Reset HP to this level's captured start HP
+	# Reset HP + enemy defeats to this level's captured start values
 	GameState.reset_to_level_start(self)
 
 	# Restart music for this level (uses stored intro/loop)
 	Music.restart_music()
 
 	tree.call_deferred("reload_current_scene")
+
 func _on_player_died() -> void:
 	restart_level()
