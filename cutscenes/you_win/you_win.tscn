@@ -41,4 +41,4 @@ horizontal_alignment = 1
 
 [node name="Subtext" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Press Interact to Return to Main Menu"
+text = "Attack to Return to Main Menu"

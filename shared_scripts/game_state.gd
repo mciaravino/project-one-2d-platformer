@@ -12,6 +12,16 @@ var level_start_hp := {}  # Dictionary[String, int]
 var enemies_defeated: int = 0
 var level_start_enemies := {}  # Dictionary[String, int]
 
+func start_new_game(default_max: int = 10) -> void:
+	# reset run/session state
+	max_hp = default_max
+	hp = max_hp
+	enemies_defeated = 0
+
+	# reset per-level restart snapshots
+	level_start_hp.clear()
+	level_start_enemies.clear()
+
 func ensure_initialized(default_max: int) -> void:
 	if hp < 0:
 		max_hp = default_max
@@ -48,11 +58,9 @@ func reset_to_level_start(scene: Node) -> void:
 	if level_start_hp.has(key):
 		hp = int(level_start_hp[key])
 	else:
-		# fallback: treat current hp as level-start if missing
 		level_start_hp[key] = hp
 
 	if level_start_enemies.has(key):
 		enemies_defeated = int(level_start_enemies[key])
 	else:
-		# fallback: treat current count as level-start if missing
 		level_start_enemies[key] = enemies_defeated

@@ -18,6 +18,7 @@ func _ready() -> void:
 	start_button.grab_focus()
 
 func _on_start_button_pressed() -> void:
+	GameState.start_new_game(10) # or whatever default you want
 	get_tree().change_scene_to_file(level_01_path)
 
 func _on_quit_button_pressed() -> void:

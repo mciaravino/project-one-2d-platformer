@@ -4,12 +4,11 @@ extends Control
 @export var win_sfx: AudioStream
 
 func _ready() -> void:
-	#Music.fade_out_and_stop(0.6)
-
 	# Play victory sound once
 	if win_sfx:
 		Sfx.play_one_shot(win_sfx)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("attack"):
+		Music.fade_out_and_stop(0.6)
 		get_tree().change_scene_to_file(return_scene)
