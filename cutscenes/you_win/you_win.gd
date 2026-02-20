@@ -9,6 +9,6 @@ func _ready() -> void:
 		Sfx.play_one_shot(win_sfx)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack_left"):
 		Music.fade_out_and_stop(0.6)
 		get_tree().change_scene_to_file(return_scene)

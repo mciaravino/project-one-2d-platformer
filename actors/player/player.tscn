@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkj7mbqg06gaf"]
+[gd_scene load_steps=14 format=3 uid="uid://dkj7mbqg06gaf"]
 
 [ext_resource type="Script" uid="uid://b7qnfumevl21k" path="res://actors/player/player.gd" id="1_oul6g"]
 [ext_resource type="AudioStream" uid="uid://mile775xiehk" path="res://audio/sfx/player_attack.wav" id="2_ax26v"]
 [ext_resource type="Texture2D" uid="uid://b3pkg476kyrk6" path="res://art/player1/player_strip.png" id="2_ilk7j"]
+[ext_resource type="AudioStream" uid="uid://hb6jcm3g7yqx" path="res://audio/sfx/player_attack_right.wav" id="2_lsqbn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vn7o3"]
 height = 40.0
@@ -75,7 +76,8 @@ height = 14.4105
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_oul6g")
-attack_sfx = ExtResource("2_ax26v")
+attack_sfx_right = ExtResource("2_lsqbn")
+attack_sfx_left = ExtResource("2_ax26v")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

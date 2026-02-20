@@ -43,3 +43,6 @@ animation = &"idle"
 position = Vector2(17, 4)
 
 [node name="ShootTimer" type="Timer" parent="."]
+
+[node name="BarsAnchor" type="Marker2D" parent="."]
+position = Vector2(0, -28)
