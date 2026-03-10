@@ -3,7 +3,7 @@
 A complete 2D platformer built in Godot 4. Play through multiple levels, 
 avoid enemies, and reach the end to trigger the win cutscene.
 
-🎮 **[Play it on itch.io]https://markcia.itch.io/project-one**
+🎮 **[Play it on itch.io](https://markcia.itch.io/project-one)**
 
 ## About
 Project One was developed as part of a game design course. It features 
