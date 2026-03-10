@@ -1,4 +1,4 @@
-# Project One
+# Project One - The Platformer
 
 A complete 2D platformer built in Godot 4. Play through multiple levels, 
 avoid enemies, and reach the end to trigger the win cutscene.
